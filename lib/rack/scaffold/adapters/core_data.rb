@@ -120,8 +120,8 @@ module Rack::Scaffold::Adapters
         end
       end
 
-
-      super(CoreData.const_set(entity.name, klass))
+      klass_constant = CoreData.const_defined?(entity.name) ? CoreData.const_get(entity.name) : CoreData.const_set(entity.name, klass)
+      super(klass_constant)
     end
   end
 end
